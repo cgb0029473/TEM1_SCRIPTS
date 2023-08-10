@@ -1,6 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from flask_mysqldb import MySQL
-
 import MySQLdb.cursors
 import json
 
@@ -27,6 +26,22 @@ def student_list():
     cursor.execute('SELECT id, first_name, last_name, city, semester FROM student')
     data = cursor.fetchall()
     return render_template('list.html', students=data)
+
+@app.route('/update_student', methods=['POST'])
+def update_student():
+    if request.method == 'POST':
+        student_id = request.form.get('id')
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        city = request.form.get('city')
+        semester = request.form.get('semester')
+        
+        cursor = mysql.connection.cursor()
+        cursor.execute('UPDATE student SET first_name=%s, last_name=%s, city=%s, semester=%s WHERE id=%s', (first_name, last_name, city, semester, student_id))
+        mysql.connection.commit()
+        cursor.close()
+        
+        return jsonify({"message": "Student updated successfully"})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=81, debug=True)

@@ -27,10 +27,9 @@ def student_list():
     data = cursor.fetchall()
     return render_template('list.html', students=data)
 
-@app.route('/update_student', methods=['POST'])
-def update_student():
+@app.route('/update_student/<int:student_id>', methods=['POST'])
+def update_student(student_id):
     if request.method == 'POST':
-        student_id = request.form.get('id')
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
         city = request.form.get('city')

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student registration</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Create New Student</h1>
+      <form action="/studentcreate" method="post">
+        <label for="first_name">First Name:</label>
+        <input
+          class="input"
+          type="text"
+          id="first_name"
+          name="first_name"
+          required
+        /><br />
+
+        <label for="last_name">Last Name:</label>
+        <input
+          class="input"
+          type="text"
+          id="last_name"
+          name="last_name"
+          required
+        /><br />
+
+        <label for="city">City:</label>
+        <input class="input" type="text" id="city" name="city" required /><br />
+
+        <label for="semester">Semester:</label>
+        <input
+          class="input"
+          type="number"
+          id="semester"
+          name="semester"
+          required
+        /><br />
+
+        <input class="button is-dark" type="submit" value="Create Student" />
+      </form>
+    </div>
+  </body>
+</html>

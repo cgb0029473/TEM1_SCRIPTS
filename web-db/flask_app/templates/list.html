@@ -6,11 +6,35 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <style>
+      ion-icon {
+        font-size: 25px;
+        color: black;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
       <div class="">
-        <h1>Student registration</h1>
+        <h1 class="title">Student registration</h1>
+      </div>
+      <a href="/studentcreate" class="button is-dark mt-2"> Create </a>
+      <div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
       </div>
       <div class="table-container">
         <table class="table table is-striped table is-fullwidth">
@@ -21,6 +45,8 @@
               <th>Last name</th>
               <th>City</th>
               <th>Semester</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -31,6 +57,14 @@
               <td>{{ student.last_name }}</td>
               <td>{{ student.city }}</td>
               <td>{{ student.semester }}</td>
+              <td>
+                <a href="/studentupdate/{{student.id}}"
+                  ><ion-icon name="brush-outline"></ion-icon
+                ></a>
+              </td>
+              <td>
+                <a href="/studentdelete/{{student.id}}"><ion-icon name="trash-outline"></ion-icon></a>
+              </td>
             </tr>
             {% endfor %}
           </tbody>
